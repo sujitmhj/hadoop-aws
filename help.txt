@@ -1,0 +1,16 @@
+wordcount -Dfs.s3n.awsAccessKeyId=AKIAJRPB6J7GTC23CAGA -Dfs.s3n.awsSecretAccessKey=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 s3n://phunkabucket/output
+
+s3://phunkabucket/jars/WordCount.jar
+
+
+
+
+elastic-mapreduce --create --stream --mapper s3://phunkabucket/prog/mapper.py --input s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690169105/textData-00112  --arg -inputformat SequenceFileAsTextInputFormat  --output s3://phunkabucket/output --reducer s3://phunkabucket/prog/reducer.py --enable-debugging --log-uri s3://phunkabucket/logs --bootstrap-action "s3://phunkabucket/bootstrap/boots.sh"
+
+elastic-mapreduce --create --stream --mapper s3://phunkabucket/code/map.py -- input s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690169105/textData-00112 --output s3://phunkabucket/output --reducer s3://phunkabucket/code/reduce.py --log-uri s3://phunkabucket/errorcodes
+
+
+elastic-mapreduce --create --stream --mapper s3://phunkabucket/prog/mapper.py --input s3://aws-publicdatasets/common-crawl/parse-output/segment/1341690169105/textData-00112  --arg -inputformat SequenceFileAsTextInputFormat  --output s3://phunkabucket/output --reducer s3://phunkabucket/prog/reducer.py --enable-debugging --log-uri s3://phunkabucket/logs --bootstrap-action "s3://phunkabucket/bootstrap/boots.sh"
+
+
+
